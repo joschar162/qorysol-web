@@ -253,10 +253,17 @@ body {
 
 /* ── Error box ── */
 .error-box {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
     background: rgba(239, 68, 68, 0.08);
     border: 1px solid rgba(239, 68, 68, 0.25);
     color: #fca5a5;
     font-size: 0.78rem;
+}
+
+.error-box.visible {
+    display: flex;
 }
 
 /* ── Shake ── */
