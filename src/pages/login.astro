@@ -1,83 +1,340 @@
 ---
-// src/pages/index.astro
-import Layout from "../layouts/Layout.astro";
+// QorySol Login Page - Astro Component
 ---
 
-<Layout title="QorySol — Ingresar">
-  <!-- Partículas -->
-  <div
-    class="particle particle-gold"
-    style="width:220px;height:220px;top:3%;left:3%;--dur:11s;--delay:0s;"
-  >
-  </div>
-  <div
-    class="particle particle-green"
-    style="width:180px;height:180px;top:60%;right:4%;--dur:9s;--delay:1.5s;"
-  >
-  </div>
-  <div
-    class="particle particle-gold"
-    style="width:90px;height:90px;top:35%;left:75%;--dur:13s;--delay:3s;"
-  >
-  </div>
-  <div
-    class="particle particle-green"
-    style="width:60px;height:60px;bottom:10%;left:15%;--dur:7s;--delay:2s;"
-  >
-  </div>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>QorySol — Ingresar</title>
 
-  <div
-    class="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] p-4"
-  >
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap");
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Raleway", sans-serif;
+        background: radial-gradient(
+          ellipse at 30% 20%,
+          #1c1408 0%,
+          #0a0a0a 60%,
+          #050505 100%
+        );
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      /* Partículas decorativas */
+      .particle {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(212, 160, 23, 0.6) 0%,
+          transparent 70%
+        );
+        animation: float var(--dur, 8s) ease-in-out infinite;
+        animation-delay: var(--delay, 0s);
+        pointer-events: none;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) scale(1);
+          opacity: 0.3;
+        }
+        50% {
+          transform: translateY(-20px) scale(1.1);
+          opacity: 0.7;
+        }
+      }
+
+      .card-glass {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(212, 160, 23, 0.2);
+        box-shadow:
+          0 0 0 1px rgba(212, 160, 23, 0.05),
+          0 25px 60px rgba(0, 0, 0, 0.8),
+          inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      }
+
+      .logo-img {
+        filter: drop-shadow(0 0 12px rgba(212, 160, 23, 0.6));
+        animation: shimmer 3s ease-in-out infinite;
+      }
+
+      @keyframes shimmer {
+        0%,
+        100% {
+          filter: drop-shadow(0 0 8px rgba(212, 160, 23, 0.4));
+        }
+        50% {
+          filter: drop-shadow(0 0 20px rgba(212, 160, 23, 0.9));
+        }
+      }
+
+      .input-field {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(212, 160, 23, 0.2);
+        color: #f0e6c8;
+        transition: all 0.3s ease;
+        font-family: "Raleway", sans-serif;
+      }
+
+      .input-field::placeholder {
+        color: rgba(212, 160, 23, 0.3);
+      }
+
+      .input-field:focus {
+        outline: none;
+        border-color: rgba(212, 160, 23, 0.7);
+        background: rgba(212, 160, 23, 0.05);
+        box-shadow:
+          0 0 0 3px rgba(212, 160, 23, 0.1),
+          0 0 20px rgba(212, 160, 23, 0.1);
+      }
+
+      .btn-login {
+        background: linear-gradient(
+          135deg,
+          #b8860b 0%,
+          #d4a017 35%,
+          #f5d97a 50%,
+          #d4a017 65%,
+          #9a6f0a 100%
+        );
+        background-size: 200% 200%;
+        color: #1a0e00;
+        font-family: "Cinzel", serif;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-login::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.15) 50%,
+          transparent 100%
+        );
+        transform: translateX(-100%);
+        transition: transform 0.5s ease;
+      }
+
+      .btn-login:hover::before {
+        transform: translateX(100%);
+      }
+
+      .btn-login:hover {
+        background-position: right center;
+        box-shadow:
+          0 0 25px rgba(212, 160, 23, 0.5),
+          0 8px 25px rgba(0, 0, 0, 0.5);
+        transform: translateY(-1px);
+      }
+
+      .btn-login:active {
+        transform: translateY(0);
+      }
+
+      .label-text {
+        font-family: "Cinzel", serif;
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        color: rgba(212, 160, 23, 0.7);
+        text-transform: uppercase;
+      }
+
+      .title-brand {
+        font-family: "Cinzel", serif;
+        background: linear-gradient(135deg, #d4a017, #f5d97a, #b8860b);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .subtitle {
+        font-family: "Raleway", sans-serif;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: rgba(212, 160, 23, 0.45);
+      }
+
+      .divider-line {
+        background: linear-gradient(
+          to right,
+          transparent,
+          rgba(212, 160, 23, 0.4),
+          transparent
+        );
+      }
+
+      .demo-badge {
+        background: rgba(212, 160, 23, 0.08);
+        border: 1px solid rgba(212, 160, 23, 0.15);
+        color: rgba(212, 160, 23, 0.5);
+        font-family: "Raleway", sans-serif;
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+      }
+
+      .icon-wrap {
+        color: rgba(212, 160, 23, 0.5);
+      }
+
+      .animate-in {
+        opacity: 0;
+        animation: fadeUp 0.7s ease forwards;
+      }
+
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+      }
+
+      /* Horizontal decorative lines */
+      .corner-tl,
+      .corner-br {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        opacity: 0.4;
+      }
+      .corner-tl {
+        top: 16px;
+        left: 16px;
+        border-top: 1px solid #d4a017;
+        border-left: 1px solid #d4a017;
+      }
+      .corner-br {
+        bottom: 16px;
+        right: 16px;
+        border-bottom: 1px solid #d4a017;
+        border-right: 1px solid #d4a017;
+      }
+
+      /* Error shake animation */
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        20%,
+        60% {
+          transform: translateX(-6px);
+        }
+        40%,
+        80% {
+          transform: translateX(6px);
+        }
+      }
+      .shake {
+        animation: shake 0.4s ease;
+      }
+    </style>
+  </head>
+  <body class="flex items-center justify-center min-h-screen p-4">
+    <!-- Partículas decorativas -->
     <div
-      class="card-glass rounded-2xl w-full max-w-sm sm:max-w-md animate-in"
-      style="animation-delay:0.05s"
+      class="particle"
+      style="width:200px;height:200px;top:5%;left:5%;--dur:10s;--delay:0s;"
     >
-      <div class="corner-tl"></div>
-      <div class="corner-br"></div>
+    </div>
+    <div
+      class="particle"
+      style="width:120px;height:120px;top:70%;right:8%;--dur:8s;--delay:2s;"
+    >
+    </div>
+    <div
+      class="particle"
+      style="width:80px;height:80px;top:40%;left:80%;--dur:12s;--delay:4s;"
+    >
+    </div>
+    <div
+      class="particle"
+      style="width:60px;height:60px;bottom:10%;left:20%;--dur:7s;--delay:1s;"
+    >
+    </div>
 
-      <!-- Header -->
-      <div class="pt-10 pb-7 px-8 sm:px-10 text-center">
+    <!-- Card principal -->
+    <div
+      class="card-glass rounded-2xl w-full max-w-sm sm:max-w-md relative animate-in"
+      style="animation-delay:0.1s"
+    >
+      <!-- Esquinas decorativas -->
+      <div class="corner-tl rounded-tl-sm"></div>
+      <div class="corner-br rounded-br-sm"></div>
+
+      <!-- Header con logo -->
+      <div class="pt-10 pb-8 px-8 sm:px-10 text-center">
+        <!-- Logo -->
         <div
-          class="flex justify-center mb-4 animate-in"
-          style="animation-delay:0.15s"
+          class="flex justify-center mb-5 animate-in"
+          style="animation-delay:0.2s"
         >
           <img
             src="data:image/png;base64,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"
-            alt="QorySol"
+            alt="QorySol Logo"
             class="logo-img h-20 sm:h-24 w-auto object-contain"
           />
         </div>
+
+        <!-- Nombre -->
         <h1
           class="title-brand text-3xl sm:text-4xl font-bold animate-in"
-          style="animation-delay:0.25s"
+          style="animation-delay:0.3s"
         >
           QorySol
         </h1>
+
+        <!-- Subtítulo -->
         <p
-          class="subtitle mt-2 animate-in"
-          style="animation-delay:0.32s"
+          class="subtitle text-xs mt-2 animate-in"
+          style="animation-delay:0.4s"
         >
           Potencia tu negocio
         </p>
+
+        <!-- Línea divisora -->
         <div
-          class="divider-gold h-px mt-6 mx-auto w-3/4 animate-in"
-          style="animation-delay:0.38s"
+          class="divider-line h-px mt-6 mx-auto w-3/4 animate-in"
+          style="animation-delay:0.5s"
         >
         </div>
       </div>
 
-      <!-- Form -->
+      <!-- Formulario -->
       <div class="px-8 sm:px-10 pb-10">
         <form
           id="loginForm"
           novalidate
-          class="space-y-5"
         >
-          <!-- DNI -->
+          <!-- Campo DNI -->
           <div
-            class="animate-in"
-            style="animation-delay:0.44s"
+            class="mb-5 animate-in"
+            style="animation-delay:0.5s"
           >
             <label
               for="dni"
@@ -86,9 +343,7 @@ import Layout from "../layouts/Layout.astro";
               DNI (usuario)
             </label>
             <div class="relative">
-              <span
-                class="icon-gold absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"
-              >
+              <span class="icon-wrap absolute left-4 top-1/2 -translate-y-1/2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-4 h-4"
@@ -132,20 +387,25 @@ import Layout from "../layouts/Layout.astro";
                 type="text"
                 id="dni"
                 name="dni"
-                required
-                placeholder="Ingrese su DNI"
+                placeholder="12345678"
                 maxlength="8"
-                pattern="[0-9]{8}"
-                inputmode="numeric"
                 class="input-field w-full pl-11 pr-4 py-3.5 rounded-xl text-sm"
+                inputmode="numeric"
+                pattern="\d{8}"
               />
             </div>
+            <p
+              id="dniError"
+              class="text-red-400 text-xs mt-1.5 hidden pl-1"
+            >
+              Ingresa tu DNI de 8 dígitos
+            </p>
           </div>
 
-          <!-- Contraseña -->
+          <!-- Campo Contraseña -->
           <div
-            class="animate-in"
-            style="animation-delay:0.50s"
+            class="mb-7 animate-in"
+            style="animation-delay:0.6s"
           >
             <label
               for="password"
@@ -154,9 +414,7 @@ import Layout from "../layouts/Layout.astro";
               Contraseña (4 dígitos)
             </label>
             <div class="relative">
-              <span
-                class="icon-gold absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"
-              >
+              <span class="icon-wrap absolute left-4 top-1/2 -translate-y-1/2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-4 h-4"
@@ -187,18 +445,18 @@ import Layout from "../layouts/Layout.astro";
                 type="password"
                 id="password"
                 name="password"
-                required
                 placeholder="••••"
                 maxlength="4"
-                pattern="[0-9]{4}"
-                inputmode="numeric"
                 class="input-field w-full pl-11 pr-12 py-3.5 rounded-xl text-sm tracking-widest"
+                inputmode="numeric"
+                pattern="\d{4}"
               />
               <button
                 type="button"
                 id="togglePass"
+                class="icon-wrap absolute right-4 top-1/2 -translate-y-1/2 hover:text-gold-400 transition-colors"
                 tabindex="-1"
-                class="icon-gold absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-80 transition-opacity"
+                title="Mostrar/ocultar"
               >
                 <svg
                   id="eyeIcon"
@@ -224,270 +482,165 @@ import Layout from "../layouts/Layout.astro";
                 </svg>
               </button>
             </div>
+            <p
+              id="passError"
+              class="text-red-400 text-xs mt-1.5 hidden pl-1"
+            >
+              Contraseña de 4 dígitos requerida
+            </p>
           </div>
 
-          <!-- Error -->
-          <div
-            id="errorMessage"
-            class="error-box hidden rounded-lg px-4 py-2.5 flex items-center gap-2"
+          <!-- Botón Ingresar -->
+          <button
+            type="submit"
+            id="submitBtn"
+            class="btn-login w-full py-4 rounded-xl text-sm flex items-center justify-center gap-2.5 animate-in"
+            style="animation-delay:0.7s"
           >
             <svg
+              id="arrowIcon"
               xmlns="http://www.w3.org/2000/svg"
               class="w-4 h-4 shrink-0"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              stroke-width="1.5"
+              stroke-width="2"
             >
               <path
-                d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
+                d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               >
               </path>
-              <line
-                x1="12"
-                y1="9"
-                x2="12"
-                y2="13"
+              <polyline
+                points="10 17 15 12 10 7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               >
-              </line><line
-                x1="12"
-                y1="17"
-                x2="12.01"
-                y2="17"
+              </polyline>
+              <line
+                x1="15"
+                y1="12"
+                x2="3"
+                y2="12"
+                stroke-linecap="round"
               >
               </line>
             </svg>
-            <span id="errorText">DNI o contraseña incorrectos.</span>
-          </div>
-
-          <!-- Botón -->
-          <div
-            class="animate-in pt-1"
-            style="animation-delay:0.56s"
-          >
-            <button
-              type="submit"
-              id="submitBtn"
-              class="btn-gold w-full py-4 rounded-xl text-sm flex items-center justify-center gap-2.5"
-            >
-              <svg
-                id="btnIcon"
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-4 h-4 shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                </path>
-                <polyline
-                  points="10 17 15 12 10 7"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                </polyline>
-                <line
-                  x1="15"
-                  y1="12"
-                  x2="3"
-                  y2="12"
-                  stroke-linecap="round"
-                >
-                </line>
-              </svg>
-              <span id="btnText">Ingresar</span>
-            </button>
-          </div>
+            <span id="btnText">Ingresar</span>
+          </button>
         </form>
 
-        <!-- Demo badge -->
+        <!-- Demo hint -->
         <div
-          class="demo-badge mt-5 rounded-lg px-4 py-2.5 flex items-center gap-2.5 animate-in"
-          style="animation-delay:0.62s"
+          class="demo-badge mt-6 rounded-lg px-4 py-2.5 flex items-center gap-2.5 animate-in"
+          style="animation-delay:0.8s"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="w-3.5 h-3.5 shrink-0 icon-gold"
+            class="w-3.5 h-3.5 shrink-0"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
             stroke-width="1.5"
+            style="color:rgba(212,160,23,0.5)"
           >
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <path
+              d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+              stroke="currentColor"
+            >
+            </path>
           </svg>
           <span>
-            Demo: DNI <strong style="color:rgba(212,160,23,0.8)">
+            Demo: DNI <strong style="color:rgba(212,160,23,0.7)">
               12345678
-            </strong> · contraseña <strong style="color:rgba(212,160,23,0.8)">
+            </strong> · contraseña <strong style="color:rgba(212,160,23,0.7)">
               1234
             </strong>
           </span>
         </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    interface UserData {
-      password: string;
-      fullName: string;
-      creditBalance: number;
-      advisor: string;
-      loans: {
-        id: number;
-        amount: number;
-        date: string;
-        status: string;
-        remaining: number;
-      }[];
-    }
+    <script>
+      const togglePass = document.getElementById(
+        "togglePass",
+      ) as HTMLButtonElement;
+      const passInput = document.getElementById("password") as HTMLInputElement;
+      const eyeIcon = document.getElementById("eyeIcon") as HTMLElement;
+      const dniInput = document.getElementById("dni") as HTMLInputElement;
+      const form = document.getElementById("loginForm") as HTMLFormElement;
+      const btnText = document.getElementById("btnText") as HTMLElement;
+      const arrowIcon = document.getElementById("arrowIcon") as HTMLElement;
+      const submitBtn = document.getElementById(
+        "submitBtn",
+      ) as HTMLButtonElement;
+      const dniErr = document.getElementById("dniError") as HTMLElement;
+      const passErr = document.getElementById("passError") as HTMLElement;
 
-    const usersData: Record<string, UserData> = {
-      "12345678": {
-        password: "1234",
-        fullName: "Ana Gómez",
-        creditBalance: 1250.0,
-        advisor: "Laura Fernández",
-        loans: [
-          {
-            id: 1,
-            amount: 500,
-            date: "2023-01-10",
-            status: "Pagado",
-            remaining: 0,
-          },
-          {
-            id: 2,
-            amount: 800,
-            date: "2023-06-15",
-            status: "Pagado",
-            remaining: 0,
-          },
-          {
-            id: 3,
-            amount: 1200,
-            date: "2024-02-20",
-            status: "Activo",
-            remaining: 950,
-          },
-        ],
-      },
-      "87654321": {
-        password: "4321",
-        fullName: "Carlos Ruiz",
-        creditBalance: 3200.0,
-        advisor: "Miguel Vargas",
-        loans: [
-          {
-            id: 1,
-            amount: 2000,
-            date: "2023-11-01",
-            status: "Activo",
-            remaining: 1500,
-          },
-          {
-            id: 2,
-            amount: 500,
-            date: "2024-01-20",
-            status: "Pagado",
-            remaining: 0,
-          },
-        ],
-      },
-      "11111111": {
-        password: "0000",
-        fullName: "Rosa Mendoza",
-        creditBalance: 500.0,
-        advisor: "Laura Fernández",
-        loans: [
-          {
-            id: 1,
-            amount: 300,
-            date: "2024-03-05",
-            status: "Activo",
-            remaining: 300,
-          },
-        ],
-      },
-    };
+      // ── Toggle contraseña ──────────────────────────────
+      togglePass.addEventListener("click", () => {
+        const isPass = passInput.type === "password";
+        passInput.type = isPass ? "text" : "password";
+        eyeIcon.innerHTML = isPass
+          ? `<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24" stroke="currentColor" stroke-linecap="round"/><line x1="1" y1="1" x2="23" y2="23" stroke="currentColor" stroke-linecap="round"/>`
+          : `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor"/><circle cx="12" cy="12" r="3" stroke="currentColor"/>`;
+      });
 
-    const loginForm = document.getElementById("loginForm") as HTMLFormElement;
-    const errorDiv = document.getElementById("errorMessage") as HTMLElement;
-    const errorText = document.getElementById("errorText") as HTMLElement;
-    const btnText = document.getElementById("btnText") as HTMLElement;
-    const btnIcon = document.getElementById("btnIcon") as HTMLElement;
-    const submitBtn = document.getElementById("submitBtn") as HTMLButtonElement;
-    const togglePass = document.getElementById(
-      "togglePass",
-    ) as HTMLButtonElement;
-    const passInput = document.getElementById("password") as HTMLInputElement;
-    const dniInput = document.getElementById("dni") as HTMLInputElement;
-    const eyeIcon = document.getElementById("eyeIcon") as HTMLElement;
+      // ── Solo dígitos ───────────────────────────────────
+      dniInput.addEventListener("input", () => {
+        dniInput.value = dniInput.value.replace(/\D/g, "").slice(0, 8);
+      });
+      passInput.addEventListener("input", () => {
+        passInput.value = passInput.value.replace(/\D/g, "").slice(0, 4);
+      });
 
-    togglePass.addEventListener("click", () => {
-      const show = passInput.type === "password";
-      passInput.type = show ? "text" : "password";
-      eyeIcon.innerHTML = show
-        ? `<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24" stroke="currentColor" stroke-linecap="round"/><line x1="1" y1="1" x2="23" y2="23" stroke="currentColor" stroke-linecap="round"/>`
-        : `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor"/><circle cx="12" cy="12" r="3" stroke="currentColor"/>`;
-    });
+      // ── Form submit ────────────────────────────────────
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const dni = dniInput.value;
+        const pass = passInput.value;
 
-    dniInput.addEventListener("input", () => {
-      dniInput.value = dniInput.value.replace(/\D/g, "").slice(0, 8);
-    });
-    passInput.addEventListener("input", () => {
-      passInput.value = passInput.value.replace(/\D/g, "").slice(0, 4);
-    });
+        let valid = true;
+        dniErr.classList.add("hidden");
+        passErr.classList.add("hidden");
 
-    loginForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const dni = dniInput.value.trim();
-      const password = passInput.value;
-      submitBtn.disabled = true;
-      btnText.textContent = "Verificando...";
-      btnIcon.innerHTML = `<path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" stroke="currentColor" opacity="0.2"/><path d="M12 2a10 10 0 0110 10" stroke="currentColor" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="0.7s" from="0 12 12" to="360 12 12" repeatCount="indefinite"/></path>`;
-      errorDiv.classList.add("hidden");
-
-      setTimeout(() => {
-        const user = usersData[dni];
-        if (user && user.password === password) {
-          btnText.textContent = "✓ Bienvenido";
-          submitBtn.style.background =
-            "linear-gradient(135deg,#14532d,#16a34a)";
-          submitBtn.style.color = "#f5d97a";
-          btnIcon.innerHTML = "";
-          sessionStorage.setItem(
-            "currentUser",
-            JSON.stringify({
-              dni,
-              fullName: user.fullName,
-              creditBalance: user.creditBalance,
-              advisor: user.advisor,
-              loans: user.loans,
-            }),
-          );
-          setTimeout(() => {
-            window.location.href = "/dashboard";
-          }, 600);
-        } else {
-          submitBtn.disabled = false;
-          btnText.textContent = "Ingresar";
-          btnIcon.innerHTML = `<path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" stroke-linecap="round" stroke-linejoin="round"/><polyline points="10 17 15 12 10 7" stroke-linecap="round" stroke-linejoin="round"/><line x1="15" y1="12" x2="3" y2="12" stroke-linecap="round"/>`;
-          errorDiv.classList.remove("hidden");
-          errorText.textContent =
-            "DNI o contraseña incorrectos. Intente nuevamente.";
-          loginForm.classList.add("shake");
-          setTimeout(() => {
-            loginForm.classList.remove("shake");
-            errorDiv.classList.add("hidden");
-          }, 3000);
+        if (!/^\d{8}$/.test(dni)) {
+          dniErr.classList.remove("hidden");
+          dniInput.classList.add("shake");
+          setTimeout(() => dniInput.classList.remove("shake"), 400);
+          valid = false;
         }
-      }, 900);
-    });
-  </script>
-</Layout>
+        if (!/^\d{4}$/.test(pass)) {
+          passErr.classList.remove("hidden");
+          passInput.classList.add("shake");
+          setTimeout(() => passInput.classList.remove("shake"), 400);
+          valid = false;
+        }
+
+        if (!valid) return;
+
+        // Estado de carga
+        btnText.textContent = "Verificando...";
+        arrowIcon.innerHTML = `<path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" stroke="currentColor" opacity="0.2"/><path d="M12 2a10 10 0 0110 10" stroke="currentColor" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="0.8s" from="0 12 12" to="360 12 12" repeatCount="indefinite"/></path>`;
+
+        setTimeout(() => {
+          if (dni === "12345678" && pass === "1234") {
+            btnText.textContent = "✓ Bienvenido";
+            submitBtn.style.background =
+              "linear-gradient(135deg, #166534, #16a34a)";
+            submitBtn.style.color = "#fff";
+          } else {
+            btnText.textContent = "Ingresar";
+            arrowIcon.innerHTML = `<path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" stroke-linecap="round" stroke-linejoin="round"/><polyline points="10 17 15 12 10 7" stroke-linecap="round" stroke-linejoin="round"/><line x1="15" y1="12" x2="3" y2="12" stroke-linecap="round"/>`;
+            dniErr.textContent =
+              "Credenciales incorrectas. Usa los datos de demo.";
+            dniErr.classList.remove("hidden");
+            submitBtn.classList.add("shake");
+            setTimeout(() => submitBtn.classList.remove("shake"), 400);
+          }
+        }, 1200);
+      });
+    </script>
+  </body>
+</html>

@@ -2,7 +2,6 @@
 export interface Props {
   title?: string;
 }
-
 const { title = "QorySol - Potencia tu negocio" } = Astro.props;
 import "../styles/global.css";
 ---
@@ -22,24 +21,13 @@ import "../styles/global.css";
       href="/favicon.svg"
     />
     <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <style>
-      /* custom scrollbar and smooth transitions */
-      .card-hover:hover {
-        transform: translateY(-2px);
-        transition: all 0.2s ease;
-      }
-      body {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        min-height: 100vh;
-      }
-    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="font-sans antialiased">
     <main class="container mx-auto px-4 py-8 max-w-6xl">

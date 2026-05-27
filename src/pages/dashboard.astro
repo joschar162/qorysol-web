@@ -8,120 +8,178 @@ import Layout from "../layouts/Layout.astro";
     id="dashboardContent"
     class="space-y-6"
   >
-    <!-- Encabezado con bienvenida y logout -->
+    <!-- ── Encabezado ── -->
     <div
-      class="flex flex-col sm:flex-row justify-between items-center bg-white rounded-xl shadow-md p-5"
+      class="dash-card rounded-2xl p-5 flex flex-col sm:flex-row justify-between items-center gap-4 animate-in"
+      style="animation-delay:0.05s"
     >
-      <div class="flex items-center gap-3">
-        <div class="bg-emerald-100 p-3 rounded-full">
-          <i class="fas fa-hand-holding-usd text-emerald-700 text-2xl"></i>
+      <div class="flex items-center gap-4">
+        <div
+          style="background:rgba(212,160,23,0.12);border:1px solid rgba(212,160,23,0.25)"
+          class="p-3 rounded-full"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-7 h-7"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="1.5"
+            style="color:#d4a017"
+          >
+            <path
+              d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"
+            >
+            </path>
+            <path
+              d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"
+              stroke-linecap="round"
+            >
+            </path>
+          </svg>
         </div>
         <div>
-          <h2 class="text-2xl font-bold text-gray-800">
-            ¡Hola, <span id="userFullName">...</span>!
+          <h2
+            class="text-2xl font-bold"
+            style="color:#f0e6c8"
+          >
+            ¡Hola, <span
+              id="userFullName"
+              style="color:#f5d97a"
+            >
+              ...
+            </span>!
           </h2>
-          <p class="text-gray-500">
-            <i class="fas fa-chart-line text-emerald-500 mr-1"></i>Potencia tu
-            negocio con QorySol
+          <p style="color:rgba(212,160,23,0.5);font-size:0.85rem">
+            <i
+              class="fas fa-chart-line mr-1"
+              style="color:#4ade80"
+            >
+            </i>Potencia tu negocio con QorySol
           </p>
         </div>
       </div>
       <button
         id="logoutBtn"
-        class="mt-3 sm:mt-0 bg-red-100 hover:bg-red-200 text-red-700 px-5 py-2 rounded-full transition flex items-center gap-2"
+        class="btn-green px-5 py-2.5 rounded-xl flex items-center gap-2 text-sm"
       >
         <i class="fas fa-sign-out-alt"></i> Cerrar sesión
       </button>
     </div>
 
-    <!-- Tarjetas resumen: saldo crédito + asesor -->
+    <!-- ── Tarjetas: saldo + asesor ── -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Saldo -->
       <div
-        class="bg-linear-to-br from-emerald-600 to-teal-700 rounded-xl shadow-lg p-6 text-white"
+        class="dash-card-gold rounded-2xl p-6 animate-in"
+        style="animation-delay:0.1s"
       >
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-emerald-100 text-sm uppercase tracking-wide">
-              Saldo de crédito disponible
-            </p>
+            <p class="label-text mb-2">Saldo de crédito disponible</p>
             <p
-              class="text-4xl font-bold mt-2"
+              class="text-4xl font-bold"
+              style="color:#f5d97a;font-family:'Cinzel',serif"
               id="creditBalanceDisplay"
             >
               S/ 0.00
             </p>
           </div>
-          <i class="fas fa-coins text-5xl text-emerald-200 opacity-80"></i>
+          <div
+            style="background:rgba(212,160,23,0.1);border:1px solid rgba(212,160,23,0.2)"
+            class="p-4 rounded-full"
+          >
+            <i
+              class="fas fa-coins text-3xl"
+              style="color:rgba(212,160,23,0.7)"
+            >
+            </i>
+          </div>
         </div>
-        <div class="mt-4 text-emerald-100 text-sm">
-          <i class="fas fa-info-circle mr-1"></i> Monto pendiente de pago
+        <div
+          class="mt-4 flex items-center gap-2"
+          style="color:rgba(212,160,23,0.5);font-size:0.8rem"
+        >
+          <i class="fas fa-info-circle"></i>
+          <span>Monto pendiente de pago</span>
         </div>
       </div>
+
+      <!-- Asesor -->
       <div
-        class="bg-white rounded-xl shadow-lg p-6 border-l-8 border-emerald-500"
+        class="dash-card rounded-2xl p-6 animate-in"
+        style="animation-delay:0.15s;border-left:3px solid #d4a017"
       >
         <div class="flex items-center gap-4">
-          <div class="bg-emerald-100 p-3 rounded-full">
-            <i class="fas fa-user-tie text-emerald-700 text-2xl"></i>
+          <div
+            style="background:rgba(22,101,52,0.4);border:1px solid rgba(74,222,128,0.2)"
+            class="p-3 rounded-full"
+          >
+            <i
+              class="fas fa-user-tie text-2xl"
+              style="color:#4ade80"
+            >
+            </i>
           </div>
           <div>
-            <p class="text-gray-500 text-sm">Tu Asesor Microfinanciero</p>
             <p
-              class="text-2xl font-bold text-gray-800"
+              style="color:rgba(212,160,23,0.5);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase"
+            >
+              Tu Asesor Microfinanciero
+            </p>
+            <p
+              class="text-2xl font-bold mt-0.5"
+              style="color:#f0e6c8"
               id="advisorName"
             >
               ---
             </p>
           </div>
         </div>
-        <div class="mt-3 text-gray-600 text-sm">
-          <i class="fas fa-phone-alt mr-1 text-emerald-500"></i> Disponible para consultas
+        <div
+          class="mt-4 flex items-center gap-2"
+          style="color:rgba(74,222,128,0.6);font-size:0.82rem"
+        >
+          <i class="fas fa-phone-alt"></i>
+          <span>Disponible para consultas</span>
         </div>
       </div>
     </div>
 
-    <!-- Historial de Préstamos -->
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-      <div class="bg-gray-50 px-6 py-4 border-b">
-        <h3 class="text-xl font-bold text-gray-800">
-          <i class="fas fa-history text-emerald-600 mr-2"></i>Historial de
-          Préstamos
+    <!-- ── Historial de Préstamos ── -->
+    <div
+      class="dash-card rounded-2xl overflow-hidden animate-in"
+      style="animation-delay:0.2s"
+    >
+      <div class="dash-header px-6 py-4 flex items-center gap-3">
+        <i
+          class="fas fa-history"
+          style="color:#f5d97a"
+        >
+        </i>
+        <h3
+          class="text-lg font-bold"
+          style="color:#f5d97a;font-family:'Cinzel',serif"
+        >
+          Historial de Préstamos
         </h3>
       </div>
       <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
-            <tr>
-              <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
-              >
-                Monto
-              </th>
-              <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
-              >
-                Fecha
-              </th>
-              <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
-              >
-                Estado
-              </th>
-              <th
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
-              >
-                Saldo Pendiente
-              </th>
+        <table class="min-w-full">
+          <thead>
+            <tr style="border-bottom:1px solid rgba(212,160,23,0.15)">
+              <th class="px-6 py-3 text-left label-text">Monto</th>
+              <th class="px-6 py-3 text-left label-text">Fecha</th>
+              <th class="px-6 py-3 text-left label-text">Estado</th>
+              <th class="px-6 py-3 text-left label-text">Saldo Pendiente</th>
             </tr>
           </thead>
-          <tbody
-            id="loansTableBody"
-            class="bg-white divide-y divide-gray-100"
-          >
+          <tbody id="loansTableBody">
             <tr>
               <td
                 colspan="4"
-                class="px-6 py-8 text-center text-gray-400"
+                class="px-6 py-8 text-center"
+                style="color:rgba(212,160,23,0.4)"
               >
                 Cargando historial...
               </td>
@@ -131,42 +189,55 @@ import Layout from "../layouts/Layout.astro";
       </div>
     </div>
 
-    <!-- Simulador de Préstamos -->
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-      <div class="bg-gray-50 px-6 py-4 border-b">
-        <h3 class="text-xl font-bold text-gray-800">
-          <i class="fas fa-calculator text-emerald-600 mr-2"></i>Simulador de
-          Préstamos
-        </h3>
-        <p class="text-gray-500 text-sm">
+    <!-- ── Simulador ── -->
+    <div
+      class="dash-card rounded-2xl overflow-hidden animate-in"
+      style="animation-delay:0.25s"
+    >
+      <div class="dash-header px-6 py-4">
+        <div class="flex items-center gap-3">
+          <i
+            class="fas fa-calculator"
+            style="color:#f5d97a"
+          >
+          </i>
+          <h3
+            class="text-lg font-bold"
+            style="color:#f5d97a;font-family:'Cinzel',serif"
+          >
+            Simulador de Préstamos
+          </h3>
+        </div>
+        <p style="color:rgba(212,160,23,0.45);font-size:0.8rem;margin-top:2px">
           Calcula cuotas personalizadas para tu negocio
         </p>
       </div>
       <div class="p-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">
-              Monto solicitado (S/)
-            </label>
+            <label class="label-text block mb-2">Monto solicitado (S/)</label>
             <div class="relative">
-              <span class="absolute left-3 top-3 text-gray-400">S/</span>
+              <span
+                class="absolute left-3 top-1/2 -translate-y-1/2 text-sm"
+                style="color:rgba(212,160,23,0.6)"
+              >
+                S/
+              </span>
               <input
                 type="number"
                 id="loanAmount"
-                class="pl-8 w-full border border-gray-300 rounded-lg p-2 focus:ring-emerald-500"
-                placeholder="1000"
                 value="2000"
                 step="100"
+                placeholder="1000"
+                class="input-field w-full pl-8 pr-4 py-2.5 rounded-xl text-sm"
               />
             </div>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">
-              Plazo (meses)
-            </label>
+            <label class="label-text block mb-2">Plazo (meses)</label>
             <select
               id="loanTerm"
-              class="w-full border border-gray-300 rounded-lg p-2 focus:ring-emerald-500"
+              class="input-field w-full px-4 py-2.5 rounded-xl text-sm"
             >
               <option value="3">3 meses</option>
               <option
@@ -181,31 +252,32 @@ import Layout from "../layouts/Layout.astro";
             </select>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">
+            <label class="label-text block mb-2">
               Tasa interés mensual (%)
             </label>
             <input
               type="number"
               id="interestRate"
-              class="w-full border border-gray-300 rounded-lg p-2 focus:ring-emerald-500"
               value="2.5"
               step="0.1"
               min="0"
+              class="input-field w-full px-4 py-2.5 rounded-xl text-sm"
             />
           </div>
         </div>
         <div class="mt-6 flex flex-wrap gap-4 items-center justify-between">
           <button
             id="simulateBtn"
-            class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-6 rounded-lg transition shadow flex items-center gap-2"
+            class="btn-gold px-6 py-2.5 rounded-xl text-sm flex items-center gap-2"
           >
-            <i class="fas fa-chart-simple"></i> Simular préstamo
+            <i class="fas fa-chart-bar"></i> Simular préstamo
           </button>
           <div
             id="simulationResult"
-            class="bg-emerald-50 p-3 rounded-lg flex-1 text-center"
+            class="sim-result p-3 rounded-xl flex-1 text-center text-sm"
+            style="color:rgba(212,160,23,0.5)"
           >
-            <span class="text-gray-600">Resultado aparecerá aquí</span>
+            Resultado aparecerá aquí
           </div>
         </div>
       </div>
@@ -220,7 +292,6 @@ import Layout from "../layouts/Layout.astro";
       status: string;
       remaining: number;
     }
-
     interface UserData {
       dni: string;
       fullName: string;
@@ -234,153 +305,133 @@ import Layout from "../layouts/Layout.astro";
     }
 
     function loadUserData(): UserData | null {
-      const storedUser = sessionStorage.getItem("currentUser");
-      if (!storedUser) {
+      const stored = sessionStorage.getItem("currentUser");
+      if (!stored) {
         redirectToLogin();
         return null;
       }
       try {
-        const user = JSON.parse(storedUser) as UserData;
-        if (!user.dni) throw new Error("Datos inválidos");
+        const user = JSON.parse(stored) as UserData;
+        if (!user.dni) throw new Error("invalid");
         return user;
-      } catch (e) {
+      } catch {
         redirectToLogin();
         return null;
       }
     }
 
     function renderLoans(loans: Loan[]): void {
-      const tbody = document.getElementById("loansTableBody");
-      if (!tbody) return;
-
+      const tbody = document.getElementById("loansTableBody") as HTMLElement;
       if (!loans || loans.length === 0) {
         tbody.innerHTML =
-          '<tr><td colspan="4" class="px-6 py-8 text-center text-gray-400">No hay préstamos registrados</td></tr>';
+          '<tr><td colspan="4" class="px-6 py-8 text-center" style="color:rgba(212,160,23,0.4)">No hay préstamos registrados</td></tr>';
         return;
       }
       tbody.innerHTML = loans
         .map(
           (loan) => `
-      <tr class="hover:bg-gray-50 transition">
-        <td class="px-6 py-4 font-medium">S/ ${loan.amount.toFixed(2)}</td>
-        <td class="px-6 py-4">${loan.date}</td>
-        <td class="px-6 py-4">
-          <span class="px-2 py-1 rounded-full text-xs font-semibold ${loan.status === "Activo" ? "bg-yellow-100 text-yellow-700" : "bg-green-100 text-green-700"}">
-            ${loan.status}
-          </span>
-        </td>
-        <td class="px-6 py-4">${loan.remaining > 0 ? `S/ ${loan.remaining.toFixed(2)}` : "-"}</td>
-      </tr>
-    `,
+        <tr class="table-row-hover transition" style="border-bottom:1px solid rgba(212,160,23,0.08)">
+          <td class="px-6 py-4 font-medium" style="color:#f0e6c8">S/ ${loan.amount.toFixed(2)}</td>
+          <td class="px-6 py-4" style="color:rgba(240,230,200,0.7)">${loan.date}</td>
+          <td class="px-6 py-4">
+            <span class="px-2.5 py-1 rounded-full text-xs font-semibold ${loan.status === "Activo" ? "badge-activo" : "badge-pagado"}">
+              ${loan.status}
+            </span>
+          </td>
+          <td class="px-6 py-4" style="color:rgba(240,230,200,0.7)">${loan.remaining > 0 ? `S/ ${loan.remaining.toFixed(2)}` : "—"}</td>
+        </tr>
+      `,
         )
         .join("");
     }
 
     function updateDashboard(user: UserData): void {
-      const nameEl = document.getElementById("userFullName");
-      const balanceEl = document.getElementById("creditBalanceDisplay");
-      const advisorEl = document.getElementById("advisorName");
-
-      if (nameEl) nameEl.innerText = user.fullName || "Inversor";
-      if (balanceEl)
-        balanceEl.innerHTML = `S/ ${user.creditBalance?.toFixed(2) ?? "0.00"}`;
-      if (advisorEl)
-        advisorEl.innerText = user.advisor || "Asignado próximamente";
-
+      const nameEl = document.getElementById("userFullName") as HTMLElement;
+      const balanceEl = document.getElementById(
+        "creditBalanceDisplay",
+      ) as HTMLElement;
+      const advisorEl = document.getElementById("advisorName") as HTMLElement;
+      nameEl.innerText = user.fullName || "Inversor";
+      balanceEl.innerHTML = `S/ ${user.creditBalance?.toFixed(2) ?? "0.00"}`;
+      advisorEl.innerText = user.advisor || "Asignado próximamente";
       renderLoans(user.loans || []);
     }
 
-    interface SimulationResult {
+    interface SimResult {
       monthlyPayment: number;
       totalPayment: number;
       totalInterest: number;
     }
-
     function simulateLoan(
       amount: number,
       months: number,
-      monthlyRatePercent: number,
-    ): SimulationResult {
-      const monthlyRate = monthlyRatePercent / 100;
-      if (monthlyRate === 0) {
-        const monthlyPayment = amount / months;
-        return { monthlyPayment, totalPayment: amount, totalInterest: 0 };
-      }
-      const denominator = Math.pow(1 + monthlyRate, months) - 1;
-      const monthlyPayment =
-        (amount * monthlyRate * Math.pow(1 + monthlyRate, months)) /
-        denominator;
-      const totalPayment = monthlyPayment * months;
-      const totalInterest = totalPayment - amount;
-      return { monthlyPayment, totalPayment, totalInterest };
+      rate: number,
+    ): SimResult {
+      const r = rate / 100;
+      if (r === 0)
+        return {
+          monthlyPayment: amount / months,
+          totalPayment: amount,
+          totalInterest: 0,
+        };
+      const mp =
+        (amount * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
+      return {
+        monthlyPayment: mp,
+        totalPayment: mp * months,
+        totalInterest: mp * months - amount,
+      };
     }
 
     function setupSimulator(): void {
-      const simulateBtn = document.getElementById("simulateBtn");
-      const amountInput = document.getElementById(
+      const btn = document.getElementById("simulateBtn") as HTMLButtonElement;
+      const amountEl = document.getElementById(
         "loanAmount",
-      ) as HTMLInputElement | null;
-      const termSelect = document.getElementById(
-        "loanTerm",
-      ) as HTMLSelectElement | null;
-      const rateInput = document.getElementById(
+      ) as HTMLInputElement;
+      const termEl = document.getElementById("loanTerm") as HTMLSelectElement;
+      const rateEl = document.getElementById(
         "interestRate",
-      ) as HTMLInputElement | null;
-      const resultDiv = document.getElementById("simulationResult");
+      ) as HTMLInputElement;
+      const resultEl = document.getElementById(
+        "simulationResult",
+      ) as HTMLElement;
+      if (!btn || !amountEl || !termEl || !rateEl || !resultEl) return;
 
-      if (
-        !simulateBtn ||
-        !amountInput ||
-        !termSelect ||
-        !rateInput ||
-        !resultDiv
-      )
-        return;
-
-      function performSimulation(): void {
-        if (!amountInput || !termSelect || !rateInput || !resultDiv) return;
-
-        let amount = parseFloat(amountInput.value);
-        const months = parseInt(termSelect.value);
-        let rate = parseFloat(rateInput.value);
-
+      function run(): void {
+        const amount = parseFloat(amountEl.value);
+        const months = parseInt(termEl.value);
+        let rate = parseFloat(rateEl.value);
         if (isNaN(amount) || amount <= 0) {
-          resultDiv.innerHTML =
-            '<span class="text-red-600"><i class="fas fa-exclamation-triangle"></i> Monto inválido</span>';
+          resultEl.innerHTML =
+            '<span style="color:#fca5a5">Monto inválido</span>';
           return;
         }
         if (isNaN(rate) || rate < 0) rate = 0;
-        if (months <= 0) return;
-
         const { monthlyPayment, totalPayment, totalInterest } = simulateLoan(
           amount,
           months,
           rate,
         );
-        resultDiv.innerHTML = `
-        <div class="text-sm space-y-1">
-          <div><span class="font-semibold">Cuota mensual:</span> S/ ${monthlyPayment.toFixed(2)}</div>
-          <div><span class="font-semibold">Total a pagar:</span> S/ ${totalPayment.toFixed(2)}</div>
-          <div><span class="font-semibold">Interés total:</span> S/ ${totalInterest.toFixed(2)}</div>
-        </div>
-      `;
+        resultEl.innerHTML = `
+          <div class="text-sm space-y-1" style="color:#f0e6c8;text-align:left">
+            <div><span style="color:#f5d97a;font-weight:600">Cuota mensual:</span> S/ ${monthlyPayment.toFixed(2)}</div>
+            <div><span style="color:#f5d97a;font-weight:600">Total a pagar:</span> S/ ${totalPayment.toFixed(2)}</div>
+            <div><span style="color:#f5d97a;font-weight:600">Interés total:</span> S/ ${totalInterest.toFixed(2)}</div>
+          </div>`;
       }
-
-      simulateBtn.addEventListener("click", performSimulation);
-      amountInput.addEventListener("input", performSimulation);
-      termSelect.addEventListener("change", performSimulation);
-      rateInput.addEventListener("input", performSimulation);
-      performSimulation();
+      btn.addEventListener("click", run);
+      amountEl.addEventListener("input", run);
+      termEl.addEventListener("change", run);
+      rateEl.addEventListener("input", run);
+      run();
     }
 
     function setupLogout(): void {
-      const logoutBtn = document.getElementById("logoutBtn");
-      if (logoutBtn) {
-        logoutBtn.addEventListener("click", () => {
-          sessionStorage.removeItem("currentUser");
-          redirectToLogin();
-        });
-      }
+      const btn = document.getElementById("logoutBtn") as HTMLButtonElement;
+      btn.addEventListener("click", () => {
+        sessionStorage.removeItem("currentUser");
+        redirectToLogin();
+      });
     }
 
     const user = loadUserData();

@@ -1,1 +1,323 @@
 @import "tailwindcss";
+
+@theme {
+    --color-gold-300: #f5d97a;
+    --color-gold-400: #e8c44a;
+    --color-gold-500: #d4a017;
+    --color-gold-600: #b8860b;
+    --color-gold-700: #9a6f0a;
+    --color-forest-50: #f0fdf4;
+    --color-forest-100: #dcfce7;
+    --color-forest-200: #bbf7d0;
+    --color-forest-400: #4ade80;
+    --color-forest-500: #166534;
+    --color-forest-600: #15803d;
+    --color-forest-700: #14532d;
+    --color-forest-800: #0f3d21;
+    --color-forest-900: #052e16;
+}
+
+/* ── Fuentes globales ── */
+body {
+    font-family: "Raleway", sans-serif;
+}
+
+/* ── Fondo global verde oscuro ── */
+body {
+    background: linear-gradient(135deg, #052e16 0%, #0f3d21 40%, #14532d 100%);
+    min-height: 100vh;
+}
+
+/* ── Partículas ── */
+.particle {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    animation: floatP var(--dur, 9s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+}
+
+.particle-gold {
+    background: radial-gradient(circle, rgba(212, 160, 23, 0.45) 0%, transparent 70%);
+}
+
+.particle-green {
+    background: radial-gradient(circle, rgba(22, 101, 52, 0.5) 0%, transparent 70%);
+}
+
+@keyframes floatP {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.25;
+    }
+
+    50% {
+        transform: translateY(-20px) scale(1.1);
+        opacity: 0.55;
+    }
+}
+
+/* ── Card vidrio verde/dorado ── */
+.card-glass {
+    background: rgba(5, 46, 22, 0.55);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(212, 160, 23, 0.25);
+    box-shadow:
+        0 0 0 1px rgba(212, 160, 23, 0.06),
+        0 30px 70px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    position: relative;
+}
+
+/* ── Esquinas decorativas ── */
+.corner-tl,
+.corner-br {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.corner-tl {
+    top: 14px;
+    left: 14px;
+    border-top: 1px solid #d4a017;
+    border-left: 1px solid #d4a017;
+}
+
+.corner-br {
+    bottom: 14px;
+    right: 14px;
+    border-bottom: 1px solid #d4a017;
+    border-right: 1px solid #d4a017;
+}
+
+/* ── Logo glow ── */
+.logo-img {
+    animation: logoPulse 3s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 8px rgba(212, 160, 23, 0.4)) drop-shadow(0 0 4px rgba(22, 101, 52, 0.3));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 22px rgba(212, 160, 23, 0.85)) drop-shadow(0 0 10px rgba(22, 101, 52, 0.5));
+    }
+}
+
+/* ── Tipografía de marca ── */
+.title-brand {
+    font-family: "Cinzel", serif;
+    background: linear-gradient(135deg, #d4a017, #f5d97a, #b8860b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(212, 160, 23, 0.4);
+    font-size: 0.7rem;
+}
+
+.label-text {
+    font-family: "Cinzel", serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(212, 160, 23, 0.7);
+}
+
+.divider-gold {
+    background: linear-gradient(to right, transparent, rgba(212, 160, 23, 0.45), transparent);
+}
+
+/* ── Inputs ── */
+.input-field {
+    background: rgba(5, 46, 22, 0.5);
+    border: 1px solid rgba(212, 160, 23, 0.22);
+    color: #f0e6c8;
+    transition: all 0.3s ease;
+    font-family: "Raleway", sans-serif;
+}
+
+.input-field::placeholder {
+    color: rgba(212, 160, 23, 0.28);
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: rgba(212, 160, 23, 0.7);
+    background: rgba(22, 101, 52, 0.25);
+    box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.1), 0 0 18px rgba(212, 160, 23, 0.08);
+}
+
+/* ── Botón login dorado ── */
+.btn-gold {
+    background: linear-gradient(135deg, #b8860b 0%, #d4a017 35%, #f5d97a 50%, #d4a017 65%, #9a6f0a 100%);
+    background-size: 200% 200%;
+    color: #1a0e00;
+    font-family: "Cinzel", serif;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-gold::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.18) 50%, transparent 100%);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+}
+
+.btn-gold:hover::before {
+    transform: translateX(100%);
+}
+
+.btn-gold:hover {
+    box-shadow: 0 0 28px rgba(212, 160, 23, 0.55), 0 8px 28px rgba(0, 0, 0, 0.45);
+    transform: translateY(-1px);
+}
+
+.btn-gold:active {
+    transform: translateY(0);
+}
+
+/* ── Botón verde esmeralda ── */
+.btn-green {
+    background: linear-gradient(135deg, #14532d, #166534, #15803d);
+    color: #f5d97a;
+    font-family: "Cinzel", serif;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    border: 1px solid rgba(212, 160, 23, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-green:hover {
+    background: linear-gradient(135deg, #166534, #15803d, #16a34a);
+    box-shadow: 0 0 20px rgba(22, 101, 52, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
+    border-color: rgba(212, 160, 23, 0.55);
+}
+
+/* ── Badge demo ── */
+.demo-badge {
+    background: rgba(212, 160, 23, 0.07);
+    border: 1px solid rgba(212, 160, 23, 0.15);
+    color: rgba(212, 160, 23, 0.5);
+    font-size: 0.7rem;
+    letter-spacing: 0.07em;
+}
+
+/* ── Iconos ── */
+.icon-gold {
+    color: rgba(212, 160, 23, 0.55);
+}
+
+.icon-green {
+    color: rgba(74, 222, 128, 0.7);
+}
+
+/* ── Animaciones de entrada ── */
+.animate-in {
+    opacity: 0;
+    animation: fadeUp 0.65s ease forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Error box ── */
+.error-box {
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    color: #fca5a5;
+    font-size: 0.78rem;
+}
+
+/* ── Shake ── */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20%,
+    60% {
+        transform: translateX(-5px);
+    }
+
+    40%,
+    80% {
+        transform: translateX(5px);
+    }
+}
+
+.shake {
+    animation: shake 0.4s ease;
+}
+
+/* ── Dashboard cards ── */
+.dash-card {
+    background: rgba(5, 46, 22, 0.55);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(212, 160, 23, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.dash-card-gold {
+    background: linear-gradient(135deg, rgba(184, 134, 11, 0.2) 0%, rgba(212, 160, 23, 0.1) 100%);
+    border: 1px solid rgba(212, 160, 23, 0.35);
+}
+
+.dash-header {
+    background: linear-gradient(135deg, #14532d 0%, #166534 60%, #1a7a3f 100%);
+    border-bottom: 1px solid rgba(212, 160, 23, 0.25);
+}
+
+.table-row-hover:hover {
+    background: rgba(22, 101, 52, 0.2);
+}
+
+.badge-activo {
+    background: rgba(212, 160, 23, 0.15);
+    color: #f5d97a;
+    border: 1px solid rgba(212, 160, 23, 0.3);
+}
+
+.badge-pagado {
+    background: rgba(22, 101, 52, 0.25);
+    color: #4ade80;
+    border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.sim-result {
+    background: rgba(22, 101, 52, 0.2);
+    border: 1px solid rgba(212, 160, 23, 0.2);
+    color: #f0e6c8;
+}
